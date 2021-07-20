@@ -1,0 +1,319 @@
+<main class="main">
+    <div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
+        <div class="container">
+            <h1 class="page-title">Lista de Productos<span>Tienda</span></h1>
+        </div><!-- End .container -->
+    </div><!-- End .page-header -->
+    <nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="#">Tienda</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Lista</li>
+            </ol>
+        </div>
+    </nav>
+
+    <div class="page-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="toolbox">
+                        <div class="toolbox-left">
+                            <div class="toolbox-info">
+                                Mostrando <span>9 de 56</span> Productos
+                            </div><!-- End .toolbox-info -->
+                        </div><!-- End .toolbox-left -->
+
+                        <div class="toolbox-right">
+                            <div class="toolbox-sort">
+                                <label for="sortby">Sort by:</label>
+                                <div class="select-custom">
+                                    <select name="sortby" id="sortby" class="form-control">
+                                        <option value="popularity" selected="selected">Most Popular</option>
+                                        <option value="rating">Most Rated</option>
+                                        <option value="date">Date</option>
+                                    </select>
+                                </div>
+                            </div><!-- End .toolbox-sort -->
+                            <div class="toolbox-layout">
+                                <a href="category-list.html" class="btn-layout active">
+                                    <svg width="16" height="10">
+                                        <rect x="0" y="0" width="4" height="4" />
+                                        <rect x="6" y="0" width="10" height="4" />
+                                        <rect x="0" y="6" width="4" height="4" />
+                                        <rect x="6" y="6" width="10" height="4" />
+                                    </svg>
+                                </a>
+
+                                <a href="category-2cols.html" class="btn-layout">
+                                    <svg width="10" height="10">
+                                        <rect x="0" y="0" width="4" height="4" />
+                                        <rect x="6" y="0" width="4" height="4" />
+                                        <rect x="0" y="6" width="4" height="4" />
+                                        <rect x="6" y="6" width="4" height="4" />
+                                    </svg>
+                                </a>
+
+                                <a href="category.html" class="btn-layout">
+                                    <svg width="16" height="10">
+                                        <rect x="0" y="0" width="4" height="4" />
+                                        <rect x="6" y="0" width="4" height="4" />
+                                        <rect x="12" y="0" width="4" height="4" />
+                                        <rect x="0" y="6" width="4" height="4" />
+                                        <rect x="6" y="6" width="4" height="4" />
+                                        <rect x="12" y="6" width="4" height="4" />
+                                    </svg>
+                                </a>
+
+                                <a href="category-4cols.html" class="btn-layout">
+                                    <svg width="22" height="10">
+                                        <rect x="0" y="0" width="4" height="4" />
+                                        <rect x="6" y="0" width="4" height="4" />
+                                        <rect x="12" y="0" width="4" height="4" />
+                                        <rect x="18" y="0" width="4" height="4" />
+                                        <rect x="0" y="6" width="4" height="4" />
+                                        <rect x="6" y="6" width="4" height="4" />
+                                        <rect x="12" y="6" width="4" height="4" />
+                                        <rect x="18" y="6" width="4" height="4" />
+                                    </svg>
+                                </a>
+                            </div><!-- End .toolbox-layout -->
+                        </div><!-- End .toolbox-right -->
+                    </div><!-- End .toolbox -->
+
+                    <div class="products">
+                        <div class="row justify-content-center">
+                            <div class="col-6 col-md-4 col-lg-3" *ngFor="let p of products">
+                                <div class="product product-2">
+                                    <figure class="product-media">
+                                        <!-- <span class="product-label label-circle label-sale">Sale</span> -->
+                                        <a>
+                                            <img [src]="p.image" alt="{{p.name}}" alt="Imagen de Producto"
+                                                class="product-image" style="cursor: pointer;"
+                                                (click)="selectProduct(p.id)">
+                                        </a>
+                                        <div class="product-action">
+                                            <a class="btn-product btn-cart" style="cursor: pointer;"
+                                                title="Agregar al carrito" [class.disabled]="p.quantity < 1"
+                                                [class.btn-outline-danger]="p.quantity < 1"
+                                                (click)="AddToCart(p.id)"><span>{{ p.quantity < 1 ? "AGOTADO"
+                                                        : "AGREGAR" }} </span></a>
+                                            <a (click)="selectProduct(p.id)" class="btn-product btn-quickview"
+                                                style="cursor: pointer;" title="Quick view"><span>vista
+                                                    rapida</span></a>
+                                        </div><!-- End .product-action -->
+                                    </figure><!-- End .product-media -->
+                                    <div class="product-body">
+                                        <h3 class="product-title"><a href="product.html">{{p.name | titlecase}}</a></h3>
+                                        <div class="product-cat">
+                                            <a href="#">{{p.description.substr(0, 30)}} ...</a>
+                                        </div><!-- End .product-cat -->
+                                        <div class="product-price">
+                                            <span class="new-price">{{p.price | currency:'USD'}}</span>
+                                        </div><!-- End .product-price -->
+
+                                        <div class="product-nav product-nav-dots justify-content-center">
+                                            <a href="#" class="active" style="background: #666666;"><span
+                                                    class="sr-only">Color name</span></a>
+                                            <a href="#" style="background: #ff887f;"><span class="sr-only">Color
+                                                    name</span></a>
+                                            <a href="#" style="background: #6699cc;"><span class="sr-only">Color
+                                                    name</span></a>
+                                            <a href="#" style="background: #f3dbc1;"><span class="sr-only">Color
+                                                    name</span></a>
+                                            <a href="#" style="background: #eaeaec;"><span class="sr-only">Color
+                                                    name</span></a>
+                                        </div><!-- End .product-nav -->
+                                    </div><!-- End .product-body -->
+                                </div><!-- End .product -->
+                            </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
+                        </div><!-- End .row -->
+                    </div><!-- End .products -->
+
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li class="page-item disabled">
+                                <a class="page-link page-link-prev" href="#" aria-label="Previous" tabindex="-1"
+                                    aria-disabled="true">
+                                    <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>Anterior
+                                </a>
+                            </li>
+                            <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item-total">de 6</li>
+                            <li class="page-item">
+                                <a class="page-link page-link-next" href="#" aria-label="Next">
+                                    Siguiente <span aria-hidden="true"><i class="icon-long-arrow-right"></i></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div><!-- End .col-lg-9 -->
+                <aside class="col-lg-3 order-lg-first">
+                    <div class="sidebar sidebar-shop">
+                        <div class="widget widget-clean">
+                            <label>Filtros:</label>
+                            <a href="#" class="sidebar-filter-clear">Limpiar todo</a>
+                        </div><!-- End .widget widget-clean -->
+
+                        <div class="widget widget-collapsible">
+                            <h3 class="widget-title">
+                                <a data-toggle="collapse" href="#widget-1" role="button" aria-expanded="true"
+                                    aria-controls="widget-1">
+                                    Categoria
+                                </a>
+                            </h3><!-- End .widget-title -->
+
+                            <div class="collapse show" id="widget-1">
+                                <div class="widget-body">
+                                    <div class="filter-items filter-items-count">
+                                        <div class="filter-item">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="cat-1">
+                                                <label class="custom-control-label" for="cat-1">Gamer</label>
+                                            </div><!-- End .custom-checkbox -->
+                                            <span class="item-count">3</span>
+                                        </div><!-- End .filter-item -->
+
+                                        <div class="filter-item">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="cat-2">
+                                                <label class="custom-control-label" for="cat-2">Laptops</label>
+                                            </div><!-- End .custom-checkbox -->
+                                            <span class="item-count">0</span>
+                                        </div><!-- End .filter-item -->
+
+                                        <div class="filter-item">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="cat-3">
+                                                <label class="custom-control-label" for="cat-3">Smartphone</label>
+                                            </div><!-- End .custom-checkbox -->
+                                            <span class="item-count">4</span>
+                                        </div><!-- End .filter-item -->
+
+                                        <div class="filter-item">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="cat-4">
+                                                <label class="custom-control-label" for="cat-4">Audio</label>
+                                            </div><!-- End .custom-checkbox -->
+                                            <span class="item-count">2</span>
+                                        </div><!-- End .filter-item -->
+
+                                        <div class="filter-item">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="cat-5">
+                                                <label class="custom-control-label" for="cat-5">Video</label>
+                                            </div><!-- End .custom-checkbox -->
+                                            <span class="item-count">2</span>
+                                        </div><!-- End .filter-item -->
+
+                                    </div><!-- End .filter-items -->
+                                </div><!-- End .widget-body -->
+                            </div><!-- End .collapse -->
+                        </div><!-- End .widget -->
+
+                        <div class="widget widget-collapsible">
+                            <h3 class="widget-title">
+                                <a data-toggle="collapse" href="#widget-3" role="button" aria-expanded="true"
+                                    aria-controls="widget-3">
+                                    Color
+                                </a>
+                            </h3><!-- End .widget-title -->
+
+                            <div class="collapse show" id="widget-3">
+                                <div class="widget-body">
+                                    <div class="filter-colors">
+                                        <a href="#" style="background: #b87145;"><span class="sr-only">Color
+                                                Name</span></a>
+                                        <a href="#" style="background: #f0c04a;"><span class="sr-only">Color
+                                                Name</span></a>
+                                        <a href="#" style="background: #333333;"><span class="sr-only">Color
+                                                Name</span></a>
+                                        <a href="#" class="selected" style="background: #cc3333;"><span
+                                                class="sr-only">Color Name</span></a>
+                                        <a href="#" style="background: #3399cc;"><span class="sr-only">Color
+                                                Name</span></a>
+                                        <a href="#" style="background: #669933;"><span class="sr-only">Color
+                                                Name</span></a>
+                                        <a href="#" style="background: #f2719c;"><span class="sr-only">Color
+                                                Name</span></a>
+                                        <a href="#" style="background: #ebebeb;"><span class="sr-only">Color
+                                                Name</span></a>
+                                    </div><!-- End .filter-colors -->
+                                </div><!-- End .widget-body -->
+                            </div><!-- End .collapse -->
+                        </div><!-- End .widget -->
+
+                        <div class="widget widget-collapsible">
+                            <h3 class="widget-title">
+                                <a data-toggle="collapse" href="#widget-4" role="button" aria-expanded="true"
+                                    aria-controls="widget-4">
+                                    Marca
+                                </a>
+                            </h3><!-- End .widget-title -->
+
+                            <div class="collapse show" id="widget-4">
+                                <div class="widget-body">
+                                    <div class="filter-items">
+                                        <div class="filter-item">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="brand-1">
+                                                <label class="custom-control-label" for="brand-1">Samsung</label>
+                                            </div><!-- End .custom-checkbox -->
+                                        </div><!-- End .filter-item -->
+
+                                        <div class="filter-item">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="brand-2">
+                                                <label class="custom-control-label" for="brand-2">Xiaomi</label>
+                                            </div><!-- End .custom-checkbox -->
+                                        </div><!-- End .filter-item -->
+
+                                        <div class="filter-item">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="brand-3">
+                                                <label class="custom-control-label" for="brand-3">Sony</label>
+                                            </div><!-- End .custom-checkbox -->
+                                        </div><!-- End .filter-item -->
+
+                                        <div class="filter-item">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="brand-4">
+                                                <label class="custom-control-label" for="brand-4">Huawei</label>
+                                            </div><!-- End .custom-checkbox -->
+                                        </div><!-- End .filter-item -->
+
+                                        <div class="filter-item">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="brand-5">
+                                                <label class="custom-control-label" for="brand-5">Acer</label>
+                                            </div><!-- End .custom-checkbox -->
+                                        </div><!-- End .filter-item -->
+
+                                        <div class="filter-item">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="brand-6">
+                                                <label class="custom-control-label" for="brand-6">Lenovo</label>
+                                            </div><!-- End .custom-checkbox -->
+                                        </div><!-- End .filter-item -->
+
+                                        <div class="filter-item">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="brand-7">
+                                                <label class="custom-control-label" for="brand-7">Hp</label>
+                                            </div><!-- End .custom-checkbox -->
+                                        </div><!-- End .filter-item -->
+
+                                    </div><!-- End .filter-items -->
+                                </div><!-- End .widget-body -->
+                            </div><!-- End .collapse -->
+                        </div><!-- End .widget -->
+
+                    </div><!-- End .sidebar sidebar-shop -->
+                </aside><!-- End .col-lg-3 -->
+            </div><!-- End .row -->
+        </div><!-- End .container -->
+    </div><!-- End .page-content -->
+</main><!-- End .main -->

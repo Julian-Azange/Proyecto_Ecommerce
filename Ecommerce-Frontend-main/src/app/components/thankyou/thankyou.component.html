@@ -1,0 +1,46 @@
+<div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
+    <div class="container">
+        <h1 class="page-title">¡Gracias por tu compra!<span>ID del Pedido : <strong>{{idOrder}}</strong></span></h1>
+    </div>
+</div>
+<nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a routerLink="/home">Inicio</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Factura</li>
+        </ol>
+    </div>
+</nav>
+
+
+<div class="container">
+    <div class="row">
+        <table class="table table-striped text-center">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Imagen</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Cantidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let p of products">
+                    <td>
+                        <img [src]="p.image" alt="{{p.title}}" class="img-thumbnail" width="100px">
+                    </td>
+                    <td>{{p.title}}</td>
+                    <td>{{p.price | currency:'USD'}}</td>
+                    <td>{{p.quantity}}</td>
+                </tr>
+    
+                <tr class="border-0">
+                    <td style="border: none;"></td>
+                    <td>TOTAL</td>
+                    <td>{{cartTotal | currency:'USD'}}</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

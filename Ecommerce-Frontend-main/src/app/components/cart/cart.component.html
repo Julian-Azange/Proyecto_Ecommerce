@@ -1,0 +1,162 @@
+<!-- <div class="container">
+    <div *ngIf="cartData.data[0].numInCart === 0;" class="text-center my-5">
+        <h4>Tu carrito esta vacio</h4>
+        <button class="btn btn-primary btn-lg mt-3" routerLink="/">IR A LA TIENDA</button>
+    </div>
+
+    <ng-container *ngIf="cartData.data[0].numInCart !== 0">
+        <div class="row">
+            <div class="col my-4">
+                <table class="table">
+                    <thead class="table-dark">
+                        <tr class="text-center">
+                            <th>Imagen</th>
+                            <th>Titulo</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let c of cartData.data; let i=index">
+                            <td class="d-flex align-items-center justify-content-around">
+                                <img [src]="c.product.image" alt="{{c.product.name}}" height="60" class="order-1">
+
+                            </td>
+                            <td>
+                                <p>{{c.product.name}}</p>
+                            </td>
+                            <td>
+                                <p>{{c.product.price | currency:'USD'}}</p>
+                            </td>
+                            <td>
+                                <form>
+                                    <div class="value-button" id="decrease" (click)="ChangeQuantity(i, false)">
+                                        <i class="fa fa-minus"></i>
+                                    </div>
+                                    <input type="number" id="number" [value]="c.numInCart" readonly
+                                        [max]="c.product.quantity" />
+                                    <div class="value-button" id="increase" (click)="ChangeQuantity(i, true)">
+                                        <i class="fa fa-plus"></i>
+                                    </div>
+                                </form>
+                            </td>
+                            <td>
+                                <p>{{cartService.CalculateSubTotal(i) | currency:'USD'}}</p>
+                            </td>
+                            <td>
+                                <span class="text-danger" style="cursor: pointer;"><i class="fa fa-trash"
+                                        (click)="cartService.DeleteProductFromCart(i)"></i></span>
+                            </td>
+                        </tr>
+                        <tr class="border-0">
+                            <td style="border: none;"></td>
+                            <td></td>
+                            <td></td>
+                            <td>TOTAL</td>
+                            <td>{{cartTotal | currency:'USD'}}</td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+
+
+            </div>
+
+            <div class="col-md-12 d-flex mb-5">
+                <div class="d-flex w-100 justify-content-between flex-sm-column flex-md-row">
+                    <a routerLink="/checkout" class="btn btn-danger btn-sm order-1">Continuar compra</a>
+                    <a routerLink="/" class="btn btn-success btn-sm order-0">Seguir comprando</a>
+                </div>
+            </div>
+
+        </div>
+    </ng-container>
+
+</div> -->
+
+
+<main class="main">
+  <div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
+    <div class="container">
+      <h1 class="page-title" (click)="consola()">Carrito de Compras<span>Tienda</span></h1>
+    </div><!-- End .container -->
+  </div><!-- End .page-header -->
+  <nav aria-label="breadcrumb" class="breadcrumb-nav">
+    <div class="container">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="#">Tienda</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Carrito de Compras</li>
+      </ol>
+    </div><!-- End .container -->
+  </nav><!-- End .breadcrumb-nav -->
+  <div class="page-content">
+    <div class="cart">
+      <div class="container">
+        <div *ngIf="cartData.data[0].numInCart === 0;" class="text-center my-5">
+          <h4>Tu carrito esta vacio</h4>
+          <button class="btn btn-primary btn-lg mt-3" routerLink="/">IR A LA TIENDA</button>
+        </div>
+        <ng-container *ngIf="cartData.data[0].numInCart !== 0">
+          <div class="row d-flex justify-content-center">
+            <div class="col-lg-10">
+              <table class="table table-cart table-mobile">
+                <thead>
+                  <tr>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Subtotal</th>
+                    <th>Eliminar</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let c of cartData.data; let i=index">
+                    <td class="product-col">
+                      <div class="product">
+                        <figure class="product-media">
+                          <a href="#">
+                            <img [src]="c.product.image" alt="{{c.product.name}}" alt="Product image">
+                          </a>
+                        </figure>
+
+                        <h3 class="product-title">
+                          <a href="#">{{c.product.name}}</a>
+                        </h3><!-- End .product-title -->
+                      </div><!-- End .product -->
+                    </td>
+                    <td class="price-col d-flex justify-content-center">{{c.product.price |
+                      currency:'USD'}}
+                    </td>
+                    <td>
+                      <div class="value-button" id="decrease" (click)="ChangeQuantity(i, false)">
+                        <i class="icon-minus"></i>
+                      </div>
+                      <input id="number" [value]="c.numInCart" readonly [max]="c.product.quantity" />
+                      <div class="value-button" id="increase" (click)="ChangeQuantity(i, true)">
+                        <i class="icon-plus"></i>
+                      </div>
+                    </td>
+                    <td class="total-col">{{(c.product.price*c.numInCart) | currency:'USD'}}</td>
+                    <td class="remove-col"><button class="btn-remove" (click)="cartService.DeleteProductFromCart(i)"><i
+                          class="icon-close"></i></button></td>
+                  </tr>
+                </tbody>
+              </table><!-- End .table table-wishlist -->
+            </div><!-- End .col-lg-9 -->
+          </div><!-- End .row -->
+          <div class="col-md-12 d-flex mb-5">
+            <div class="d-flex w-100 justify-content-between flex-sm-column flex-md-row">
+              <a routerLink="/checkout" class="btn btn-danger btn-sm order-1">Continuar compra</a>
+              <a routerLink="/" class="btn btn-secondary btn-sm">Seguir comprando</a>
+            </div>
+          </div>
+        </ng-container>
+
+      </div><!-- End .container -->
+    </div><!-- End .cart -->
+  </div><!-- End .page-content -->
+
+</main><!-- End .main -->

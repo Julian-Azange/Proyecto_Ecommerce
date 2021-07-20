@@ -1,0 +1,85 @@
+<nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+  <div class="container">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/home">Inicio</a></li>
+      <li class="breadcrumb-item"><a routerLink="/categories">Categorias</a></li>
+      <li class="breadcrumb-item"><a routerLink="/#">{{product.category}}</a></li>
+      <li class="breadcrumb-item"><a routerLink="/product">{{product.name}}</a></li>
+    </ol>
+  </div><!-- End .container -->
+</nav><!-- End .breadcrumb-nav -->
+
+<!-- SECTION -->
+<div class="section">
+  <!-- container -->
+  <div class="container">
+    <!-- row -->
+    <div class="row">
+      <!-- Product thumb imgs -->
+      <div class="col-md-2  col-md-pull-5">
+        <ng-template [ngIf]="thumbImages.length > 0">
+          <div id="product-imgs">
+            <div class="product-preview" *ngFor="let t of thumbImages">
+              <img [src]="t" alt="{{product.name}}" (mouseenter)="ChangeMainPhoto(t)" width="100">
+            </div>
+          </div>
+        </ng-template>
+        <ng-template [ngIf]="thumbImages.length === 0">
+          <div id="product-imgs">
+            <div class="product-preview">
+              <img [src]="product.image" alt="{{product.name}}">
+            </div>
+          </div>
+        </ng-template>
+      </div>
+      <!-- /Product thumb imgs -->
+      <!-- Product main img -->
+      <div class="col-md-5 col-md-push-2">
+        <div id="product-main-img">
+          <ng-template [ngIf]="thumbImages.length > 0">
+            <img [src]="chosenPhoto" />
+            <!-- <div class="product-preview" *ngFor="let t of thumbImages">
+              <img [src]="t" alt="{{product.name}}">
+            </div> -->
+          </ng-template>
+          <ng-template [ngIf]="thumbImages.length === 0">
+            <div class="product-preview">
+              <div class="bg-light">
+                Sin imagen
+              </div>
+              <img [src]="product.image" alt="{{product.name}}">
+            </div>
+          </ng-template>
+        </div>
+      </div>
+      <!-- /Product main img -->
+
+      <!-- DETALLES -->
+      <div class="product-details product-details-centered">
+        <h1 class="product-title">{{product.name}}</h1>
+        <div class="product-price">
+          {{product.price | currency:'USD'}}
+        </div>
+
+        <div class="product-content">
+          {{product.description}}
+        </div>
+
+        <div class="product-details-action">
+          <div class="details-action-col">
+            <div class="product-details-quantity">
+              <input type="number" id="qty" class="form-control" step="1" data-decimals="0" required
+                [max]="product?.quantity >=1 ? product?.quantity : 0" min="1" readonly #quantity
+                value="{{product?.quantity >= 1 ? 1: 1}}">
+            </div>
+          </div>
+        </div>
+
+        <div class="product-details-footer">
+          <div class="social-icons social-icons">
+            <button class="btn btn-outline-primary-2" (click)="addToCart(product?.id)"><i class="icon-shopping-cart"></i>Agregar al carrito</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,164 @@
+<main class="main">
+  <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+    <div class="container">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Iniciar Sesión / Registrarse</li>
+      </ol>
+    </div><!-- End .container -->
+  </nav><!-- End .breadcrumb-nav -->
+
+  <div class="login-page bg-image pt-8 pb-8 pt-md-12 pb-md-12 pt-lg-17 pb-lg-17"
+    style="background-image: url('assets/images/backgrounds/login-bg.jpg')">
+    <div class="container">
+      <div class="form-box">
+        <div class="form-tab">
+          <ul class="nav nav-pills nav-fill" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="signin-tab-2" data-toggle="tab" href="#signin-2" role="tab"
+                aria-controls="signin-2" aria-selected="false">Iniciar Sesión</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="register-tab-2" data-toggle="tab" href="#register-2" role="tab"
+                aria-controls="register-2" aria-selected="true">Registrarse</a>
+            </li>
+          </ul>
+          <ng-container *ngIf="loginMessage?.length > 0">
+            <div class="alert alert-danger alert-dismissible text-center">
+              {{loginMessage}}
+            </div>
+          </ng-container>
+          <!-- Login -->
+          <div class="tab-content">
+            <div class="tab-pane fade show active" id="signin-2" role="tabpanel" aria-labelledby="signin-tab-2">
+              <form novalidate #myform="ngForm" action="#">
+                <div class="form-group">
+                  <label for="singin-email-2">Usuario o Correo electrónico</label>
+                  <input class="form-control" id="email" type="email" [(ngModel)]="email" name="email" required>
+                </div><!-- End .form-group -->
+
+                <div class="form-group">
+                  <label for="singin-password-2">Contraseña</label>
+                  <input class="form-control" id="password" type="password" [(ngModel)]="password" name="password"
+                    required>
+                </div><!-- End .form-group -->
+                <div class="d-flex flex-column align-items-center justify-content-around">
+                  <div class="form-footer">
+                    <!-- <button type="submit" class="btn btn-outline-primary-2" (click)="login(myform)"
+                      [disabled]="myform.invalid && myform.touched">
+                      <span>INICIAR SESIÓN</span>
+                    </button> -->
+
+                    <button type="submit" class="btn btn-outline-primary-2" (click)="LoginwithToken(myform)"
+                      [disabled]="myform.invalid && myform.touched">
+                      <span>INICIAR SESIÓN</span>
+                    </button>
+
+                  </div><!-- End .form-footer -->
+
+                </div>
+              </form>
+              <p class="text-center">o iniciar con</p>
+              <div class="d-flex justify-content-center">
+                <div class="col-sm-6">
+                  <button (click)="signInWithGoogle()" class="btn btn-danger btn-sm btn-block mt-2"><span><i
+                        class="icon-google"></i> Google </span>
+                  </button>
+                </div><!-- End .col-6 -->
+              </div>
+            </div><!-- .End .tab-pane -->
+
+            <!-- registro -->
+            <ng-container *ngIf="registrationMessage?.length > 0">
+              <div class="alert alert-success alert-dismissible">
+                {{registrationMessage}}
+              </div>
+            </ng-container>
+            <div class="tab-pane" id="register-2" role="tabpanel" aria-labelledby="register-tab-2">
+              <form action="#" (ngSubmit)="registerUser()" [formGroup]="registrationForm" class="form-horizontal"
+                novalidate>
+                <div class="d-flex justify-content-between">
+                  <div class="form-group">
+                    <label for="fname">Primer nombre</label>
+                    <input type="text" class="form-control" formControlName="fname" id="fname" name="fname" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="lname">Primer apellido</label>
+                    <input type="text" class="form-control" formControlName="lname" id="lname" name="lname" required>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="email">Correo electrónico</label>
+                  <input type="text" class="form-control" formControlName="email" id="email" name="email" required>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-control-feedback">
+                    <ng-container *ngIf="formControls.email.errors?.taken && formControls.email.touched">
+                      <span class="text-danger" style="font-size: 12px;">
+                        <i class="icon-close"> Correo ya registrado</i>
+                      </span>
+                    </ng-container>
+                    <ng-container *ngIf="formControls.email.pending && formControls.email.touched">
+                      <span class="text-info">
+                        <i class="icon-hourglass" style="font-size: 12px;"> Verificando correo ....</i>
+                      </span>
+                    </ng-container>
+                    <ng-container
+                      *ngIf="!formControls.email.errors && formControls.email.touched && !formControls.email.pending">
+                      <span class="text-success" style="font-size: 12px;">
+                        <i class="icon-check"> Correo disponible </i>
+                      </span>
+                    </ng-container>
+                    <ng-container *ngIf="formControls.email.errors?.required && formControls.email.touched">
+                      <span class="text-danger" style="font-size: 12px;">
+                        <i class="icon-close"> Correo requerido</i>
+                      </span>
+                    </ng-container>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <div class="form-group">
+                    <label for="fname">Contraseña</label>
+                    <input type="password" class="form-control" formControlName="password" id="password" name="password"
+                      required>
+                    <div class="col-md-3">
+                      <div class="form-control-feedback">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="fname">Confirmar contraseña</label>
+                    <input type="password" class="form-control" formControlName="confirmPassword" id="password-confirm"
+                      name="password-confirmation" required>
+                    <div class="col-md-6">
+                      <div class="form-control-feedback">
+                      </div>
+                    </div>
+                    <div class="col-md-15">
+                      <div class="form-control-feedback">
+                        <ng-container *ngIf="!comparePassword && formControls.confirmPassword.touched">
+                          <span class="text-danger" style="font-size: 12px;">
+                            <i class="icon-close"> Las contraseñas no coinciden</i>
+                          </span>
+                        </ng-container>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex flex-column align-items-center justify-content-around">
+                  <div class="form-footer">
+                    <button type="submit" class="btn btn-outline-primary-2"
+                      [disabled]="(registrationForm.invalid || registrationForm.pending) && registrationForm.touched ">
+                      <span>REGISTRARSE</span>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

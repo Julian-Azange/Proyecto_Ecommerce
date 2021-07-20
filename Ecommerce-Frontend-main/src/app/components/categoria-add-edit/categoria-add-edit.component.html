@@ -1,0 +1,14 @@
+<div class="p-5 m-5">
+  <div class="px-5 mx-5">
+    <h2 (click)="consola()">
+      {{title}}
+    </h2>
+    <form class="py-5" [formGroup]="categoryForm" (ngSubmit)="Submit()">
+      <label>Nombre : </label>
+      <input type="text" class="form-control" formControlName="title" />
+      <input type="submit" [value]="btn_text"
+      [ngClass]="idCategory ? 'btn btn-warning' : 'btn btn-success' "
+      [disabled]=" categoryForm.status==='INVALID' "/>
+    </form>
+  </div>
+</div>

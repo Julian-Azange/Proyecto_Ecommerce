@@ -1,0 +1,219 @@
+<ngx-spinner bdColor="rgba(151,149,149,0.4)" size="medium" color="blue" type="line-scale-party"
+    fullScreen="true">
+    <p style="font-size: 20px; color: black">Cargando</p>
+</ngx-spinner>
+
+<main class="main">
+  <div class="intro-slider-container mb-5">
+    <div class="intro-slider owl-carousel owl-theme owl-nav-inside owl-light" data-toggle="owl" data-owl-options='{
+              "dots": true,
+              "nav": false,
+              "responsive": {
+                  "1200": {
+                      "nav": true,
+                      "dots": false
+                  }
+              }
+          }'>
+      <div class="intro-slide" style="background-image: url('../../../assets/images/slide-1.png');">
+        <div class="container intro-content">
+          <div class="row justify-content-end">
+            <div class="col-auto col-sm-7 col-md-6 col-lg-5">
+              <h3 class="intro-subtitle text-third">Ofertas y Promociones</h3>
+              <h1 class="intro-title">Apple</h1>
+              <h1 class="intro-title">Ipad Air 12,9'</h1>
+
+              <div class="intro-price">
+                <sup class="intro-old-price">$4'853.000</sup>
+                <span class="text-third">
+                  $4'649<sup>.000</sup>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="intro-slide" style="background-image: url(assets/images/slide-2.png);">
+        <div class="container intro-content">
+          <div class="row justify-content-end">
+            <div class="col-auto col-sm-7 col-md-6 col-lg-5">
+              <h3 class="intro-subtitle text-primary">Diademas</h3><!-- End .h3 intro-subtitle -->
+              <h1 class="intro-title">Beats Dre Studio 3</h1><!-- End .intro-title -->
+
+              <div class="intro-price">
+                <sup>Hoy:</sup>
+                <span class="text-primary">
+                  $1'200<sup>.000</sup>
+                </span>
+              </div><!-- End .intro-price -->
+            </div><!-- End .col-md-6 offset-md-6 -->
+          </div><!-- End .row -->
+        </div>
+      </div>
+    </div>
+
+    <span class="slider-loader"></span>
+  </div>
+
+  <div class="container">
+    <h2 class="title text-center mb-4">Categorias Populares</h2><!-- End .title text-center -->
+
+    <div class="cat-blocks-container">
+      <div class="row">
+        <div class="col-6 col-sm-4 col-lg-2">
+          <a href="category.html" class="cat-block">
+            <figure>
+              <span>
+                <img src="../../../assets/images/demos/demo-4/cats/1.png" alt="Category image">
+              </span>
+            </figure>
+
+            <h3 class="cat-block-title">Computador & Laptop</h3><!-- End .cat-block-title -->
+          </a>
+        </div><!-- End .col-sm-4 col-lg-2 -->
+
+        <div class="col-6 col-sm-4 col-lg-2">
+          <a href="category.html" class="cat-block">
+            <figure>
+              <span>
+                <img src="../../../assets/images/demos/demo-4/cats/2.png" alt="Category image">
+              </span>
+            </figure>
+
+            <h3 class="cat-block-title">Camaras Digitales</h3><!-- End .cat-block-title -->
+          </a>
+        </div><!-- End .col-sm-4 col-lg-2 -->
+
+        <div class="col-6 col-sm-4 col-lg-2">
+          <a href="category.html" class="cat-block">
+            <figure>
+              <span>
+                <img src="../../../assets/images/demos/demo-4/cats/3.png" alt="Category image">
+              </span>
+            </figure>
+
+            <h3 class="cat-block-title">Smart Phones</h3><!-- End .cat-block-title -->
+          </a>
+        </div><!-- End .col-sm-4 col-lg-2 -->
+
+        <div class="col-6 col-sm-4 col-lg-2">
+          <a href="category.html" class="cat-block">
+            <figure>
+              <span>
+                <img src="../../../assets/images/demos/demo-4/cats/4.png" alt="Category image">
+              </span>
+            </figure>
+
+            <h3 class="cat-block-title">Television</h3><!-- End .cat-block-title -->
+          </a>
+        </div><!-- End .col-sm-4 col-lg-2 -->
+
+        <div class="col-6 col-sm-4 col-lg-2">
+          <a href="category.html" class="cat-block">
+            <figure>
+              <span>
+                <img src="../../../assets/images/demos/demo-4/cats/5.png" alt="Category image">
+              </span>
+            </figure>
+
+            <h3 class="cat-block-title">Audio</h3><!-- End .cat-block-title -->
+          </a>
+        </div><!-- End .col-sm-4 col-lg-2 -->
+
+        <div class="col-6 col-sm-4 col-lg-2">
+          <a href="category.html" class="cat-block">
+            <figure>
+              <span>
+                <img src="../../../assets/images/demos/demo-4/cats/6.png" alt="Category image">
+              </span>
+            </figure>
+
+            <h3 class="cat-block-title">Smart Watches</h3><!-- End .cat-block-title -->
+          </a>
+        </div><!-- End .col-sm-4 col-lg-2 -->
+      </div><!-- End .row -->
+    </div><!-- End .cat-blocks-container -->
+  </div><!-- End .container -->
+</main>
+
+<!-- PRODUCTOS -->
+
+<div class="container for-you">
+      <h2 class="title text-center mb-4">Productos Recomendados</h2>
+
+  <div class="products">
+    <div class="row justify-content-center">
+      <div class="col-6 col-md-4 col-lg-3" *ngFor="let p of products">
+        <div class="product product-2">
+          <figure class="product-media">
+            <!-- <span class="product-label label-circle label-sale">Sale</span> -->
+            <a>
+              <img [src]="p.image" alt="{{p.name}}" alt="Imagen de Producto" class="product-image" style="cursor: pointer;" (click)="selectProduct(p.id)">
+            </a>
+            <div class="product-action">
+              <a class="btn-product btn-cart" style="cursor: pointer;" title="Agregar al carrito" [class.disabled]="p.quantity < 1"
+              [class.btn-outline-danger]="p.quantity < 1" (click)="AddToCart(p.id)"><span>{{ p.quantity < 1 ? "AGOTADO" : "AGREGAR" }} </span></a>
+              <a (click)="selectProduct(p.id)" class="btn-product btn-quickview" style="cursor: pointer;" title="Quick view"><span>vista rapida</span></a>
+            </div><!-- End .product-action -->
+          </figure><!-- End .product-media -->
+          <div class="product-body">
+            <h3 class="product-title"><a href="product.html">{{p.name | titlecase}}</a></h3>
+            <div class="product-cat">
+              <a href="#">{{p.description.substr(0, 30)}} ...</a>
+            </div><!-- End .product-cat -->
+            <div class="product-price">
+              <span class="new-price">{{p.price | currency:'USD'}}</span>
+            </div><!-- End .product-price -->
+
+            <div class="product-nav product-nav-dots justify-content-center">
+              <a href="#" class="active" style="background: #666666;"><span class="sr-only">Color name</span></a>
+              <a href="#" style="background: #ff887f;"><span class="sr-only">Color name</span></a>
+              <a href="#" style="background: #6699cc;"><span class="sr-only">Color name</span></a>
+              <a href="#" style="background: #f3dbc1;"><span class="sr-only">Color name</span></a>
+              <a href="#" style="background: #eaeaec;"><span class="sr-only">Color name</span></a>
+            </div><!-- End .product-nav -->
+          </div><!-- End .product-body -->
+        </div><!-- End .product -->
+      </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
+    </div><!-- End .row -->
+  </div><!-- End .products -->
+</div><!-- End .container -->
+
+
+<!-- <div class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="section-title d-flex justify-content-center">
+          <h3>Nuevos Productos</h3>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 col-sm-6" *ngFor="let p of products">
+            <div class="card my-2">
+              <img [src]="p.image" alt="{{p.name}}" width="200px" height="290px" class="card-img-top"
+                style="cursor: pointer;" (click)="selectProduct(p.id)">
+              <div class="card-body">
+                <h5 class="card-title" style="font-size: 15px;">
+                  {{p.name | titlecase}}
+                </h5>
+                <p>{{p.description.substr(0, 30)}} ...</p>
+                <p class="lead">{{p.price | currency:'USD'}}</p>
+                <div class="row d-flex justify-content-center border-primary my-3">
+                  <div class="col-md-6">
+                    <button class="btn btn-outline-primary btn-sm btn-block" [class.disabled]="p.quantity < 1"
+                      [class.btn-outline-danger]="p.quantity < 1" (click)="AddToCart(p.id)">
+                      <i class="fa fa-shopping-cart"></i>
+                      {{ p.quantity < 1 ? "AGOTADO" : "AGREGAR" }} </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->

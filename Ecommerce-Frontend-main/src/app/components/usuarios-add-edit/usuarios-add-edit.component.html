@@ -1,0 +1,47 @@
+<div class="p-5 m-5">
+  <div class="px-5 mx-5">
+    <h2>
+      {{title}}
+    </h2>
+    <form class="py-5" [formGroup]="userForm" (ngSubmit)="Submit()">
+      <div class="form-group">
+        <label class="form-label">Nombre de usuario : </label>
+        <input type="text" class="form-control" formControlName="username" />
+      </div>
+      <div class="form-group">
+        <label>Contraseña : </label>
+        <input type="text" class="form-control" formControlName="password" />
+      </div>
+      <div class="form-group">
+        <label>Correo Electrónico : </label>
+        <input type="email" class="form-control" formControlName="email" />
+      </div>
+      <div class="form-group">
+        <label>Nombre : </label>
+        <input type="text" class="form-control" formControlName="fname" />
+      </div>
+      <div class="form-group">
+        <label>Apellido : </label>
+        <input type="text" class="form-control" formControlName="lname" />
+      </div>
+      <div class="form-group">
+        <label>Edad : </label>
+        <input type="number" class="form-control" formControlName="age" />
+      </div>
+      <div class="form-group">
+        <label>Rol : </label>
+        <select class="form-control" formControlName="role">
+          <option value="555">Usuario Normal</option>
+          <option value="777">Usuario Admin</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Foto para el usuario : </label>
+        <input type="text" class="form-control" formControlName="photoUrl" />
+      </div>
+      <input type="submit" [value]="btn_text"
+      [ngClass]="idUser ? 'btn btn-warning' : 'btn btn-success' "
+      [disabled]=" userForm.status==='INVALID' "/>
+    </form>
+  </div>
+</div>

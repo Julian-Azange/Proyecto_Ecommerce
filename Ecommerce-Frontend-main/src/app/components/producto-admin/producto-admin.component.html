@@ -1,0 +1,80 @@
+<div class="p-5 m-5">
+  <div class="px-5 mx-5">
+    <div class="container-fluid">
+      <h3>Lista de los productos</h3>
+    </div>
+    <div class="container-fluid my-3 d-flex justify-content-between">
+      <button class="btn btn-success" [routerLink]="['/admin']"><i class="icon-angle-left"></i>Volver al Menu</button>
+      <button class="btn btn-primary" [routerLink]="['/admin/producto/Add']"><i class="icon-plus"></i>Agregar Producto</button>
+    </div>
+    <div class="container-fluid my-3">
+      <table class="table table-striped table-responsive text-center" style="overflow-x: scroll;">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Image</th>
+            <th scope="col">Imagen</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Short_desc</th>
+            <th scope="col">Categoria</th>
+            <th scope="col">Ver Detalles</th>
+            <th scope="col">Editar</th>
+            <th scope="col">Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let prod of productos">
+            <td scope="row">{{prod.id}}</td>
+            <td>{{prod.title}}</td>
+            <td>
+              <img [src]="prod.image" />
+            </td>
+            <td>
+              <img [src]="prod.images" />
+            </td>
+            <td>{{prod.description | slice:0:50}} ...</td>
+            <td>{{prod.price}} $</td>
+            <td>{{prod.quantity}}</td>
+            <td>{{prod.short_desc}}</td>
+            <td>{{prod.category}}</td>
+            <td>
+              <button class="btn btn-success" [routerLink]="['/admin/producto/Details/', prod.id]" >Ver Detalles</button>
+            </td>
+            <td>
+              <button class="btn btn-warning" [routerLink]="['/admin/producto/Edit/', prod.id]">Editar</button>
+            </td>
+            <td>
+              <button class="btn btn-danger" data-toggle="modal" data-target="#eliminarModal"
+                (click)="FillProductToDelete(prod.id)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="eliminarModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-danger">
+        <h5 class="modal-title">Advertencia</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body p-5 mx-5">
+        ¿Está seguro que desea eliminar esta categoria <strong>'{{productoToDelete.title}}'</strong>?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">No quiero eliminar</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal"
+          (click)="DeleteProduct(productoToDelete.id)">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>

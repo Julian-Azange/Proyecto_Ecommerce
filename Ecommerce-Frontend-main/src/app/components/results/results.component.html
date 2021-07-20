@@ -1,0 +1,42 @@
+<div class="container-fluid  p-5 m-5">
+  <h5>Resutados con : {{text}}</h5>
+</div>
+<div class="p-5 m-5 text-center" *ngIf="nullMessage">
+  <span>{{nullMessage}}</span>
+</div>
+<div class="products p-5 m-5">
+  <div class="row justify-content-center">
+    <div class="col-6 col-md-4 col-lg-3" *ngFor="let p of products">
+      <div class="product product-2">
+        <figure class="product-media">
+          <!-- <span class="product-label label-circle label-sale">Sale</span> -->
+          <a>
+            <img [src]="p.image" alt="{{p.name}}" alt="Imagen de Producto" class="product-image" style="cursor: pointer;" (click)="selectProduct(p.id)">
+          </a>
+          <div class="product-action">
+            <a class="btn-product btn-cart" style="cursor: pointer;" title="Agregar al carrito" [class.disabled]="p.quantity < 1"
+            [class.btn-outline-danger]="p.quantity < 1" (click)="AddToCart(p.id)"><span>{{ p.quantity < 1 ? "AGOTADO" : "AGREGAR" }} </span></a>
+            <a class="btn-product btn-quickview" style="cursor: pointer;" title="Quick view"><span>vista rapida</span></a>
+          </div><!-- End .product-action -->
+        </figure><!-- End .product-media -->
+        <div class="product-body">
+          <h3 class="product-title"><a href="product.html">{{p.name | titlecase}}</a></h3>
+          <div class="product-cat">
+            <a href="#">{{p.description.substr(0, 30)}} ...</a>
+          </div><!-- End .product-cat -->
+          <div class="product-price">
+            <span class="new-price">{{p.price | currency:'USD'}}</span>
+          </div><!-- End .product-price -->
+
+          <div class="product-nav product-nav-dots justify-content-center">
+            <a href="#" class="active" style="background: #666666;"><span class="sr-only">Color name</span></a>
+            <a href="#" style="background: #ff887f;"><span class="sr-only">Color name</span></a>
+            <a href="#" style="background: #6699cc;"><span class="sr-only">Color name</span></a>
+            <a href="#" style="background: #f3dbc1;"><span class="sr-only">Color name</span></a>
+            <a href="#" style="background: #eaeaec;"><span class="sr-only">Color name</span></a>
+          </div><!-- End .product-nav -->
+        </div><!-- End .product-body -->
+      </div><!-- End .product -->
+    </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
+  </div><!-- End .row -->
+</div><!-- End .products -->

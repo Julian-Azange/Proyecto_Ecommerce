@@ -1,0 +1,61 @@
+<div class="main">
+  <div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
+    <div class="container">
+        <h1 class="page-title">Mis compras<span>con nosotros</span></h1>
+    </div>
+  </div>
+
+  <div class="container p-5 text-center">
+    <h4>Listado de compras</h4>
+    <div class="fluid-container row justify-content-center p-5">
+
+      <div class="card p-5 column" *ngFor="let item of detalles; let i = index">
+        <div class="card-header">
+          Compra con Id {{item[0].idOrder}}
+        </div>
+        <div class="card-body text-center">
+          <h5 class="card-title p-5">Ver detalle</h5>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalDetalle" (click)="LlenarModal(i)">Revisar el detalle</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalDetalle" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-dark">
+        <h5 class="modal-title text-light">Detalles</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body row p-3 justify-content-center">
+        <div class="card" style="width: 18rem;" *ngFor="let item of modalProducto">
+          <img class="card-img-top" [src]="item.image" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{item.title}}</h5>
+            <p class="card-text">
+              {{item.descrption}}
+            </p>
+            <p>
+              <strong>Cantidad : </strong>: {{item.quantity}}
+            </p>
+            <p>
+              <strong>Precio Unitario : </strong> {{item.price}} $
+            </p>
+            <p>
+              <strong>Precio conjunto : </strong> {{item.price * item.quantity}} $
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>

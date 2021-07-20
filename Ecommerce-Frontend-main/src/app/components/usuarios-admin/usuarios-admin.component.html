@@ -1,0 +1,76 @@
+<div class="p-5 m-5">
+  <div class="px-5 mx-5">
+    <div class="container-fluid">
+      <h3>Lista de los usuarios</h3>
+    </div>
+    <div class="container-fluid my-3 d-flex justify-content-between">
+      <button class="btn btn-success" [routerLink]="['/admin']"><i class="icon-angle-left"></i>Volver al Menu</button>
+      <button class="btn btn-primary" [routerLink]="['/admin/users/Add']" ><i class="icon-plus"></i>Agregar Usuario</button>
+    </div>
+    <div class="container-fluid my-3">
+      <table class="table table-striped text-center">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Username</th>
+            <th scope="col">email</th>
+            <th scope="col">fname</th>
+            <th scope="col">lname</th>
+            <th scope="col">Edad</th>
+            <th scope="col">Rol</th>
+            <th scope="col">Url de foto</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Ver Detalles</th>
+            <th scope="col">Editar</th>
+            <th scope="col">Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td scope="row">{{user.id}}</td>
+            <td>{{user.username}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.fname}}</td>
+            <td>{{user.lname}}</td>
+            <td>{{user.age}}</td>
+            <td>{{user.role}}</td>
+            <td>
+              <img [src]="user.photoUrl" />
+            </td>
+            <td>{{user.type}}</td>
+            <td>
+              <button class="btn btn-success" [routerLink]="['/admin/users/Details/', user.id]" >Ver Detalles</button>
+            </td>
+            <td>
+              <button class="btn btn-warning" [routerLink]="['/admin/users/Edit/', user.id]" >Editar</button>
+            </td>
+            <td>
+              <button class="btn btn-danger" data-toggle="modal" data-target="#eliminarModal" (click)="FillUserToDelete(user.id)" >Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="eliminarModal" tabindex="-1" role="dialog" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-danger">
+        <h5 class="modal-title" >Advertencia</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body p-5 mx-5">
+        ¿Está seguro que desea eliminar esta categoria <strong>'{{userToDelete.id}}'</strong>?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">No quiero eliminar</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="DeleteUser(userToDelete.id)">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>

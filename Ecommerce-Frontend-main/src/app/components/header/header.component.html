@@ -1,0 +1,214 @@
+<header class="header header-intro-clearance header-4">
+
+    <div class="header-middle">
+        <div class="container">
+            <div class="header-left">
+                <button class="mobile-menu-toggler">
+                    <span class="sr-only">Toggle mobile menu</span>
+                    <i class="icon-bars"></i>
+                </button>
+
+                <a href="index.html" class="logo">
+                    <img src="/assets/images/demos/demo-4/logo.png" alt="Logo" width="160" height="65">
+                </a>
+            </div><!-- End .header-left -->
+
+            <div class="header-center">
+                <div class="header-search header-search-extended header-search-visible d-none d-lg-block">
+                    <a class="search-toggle" role="button">
+                        <i class="icon-search"></i>
+                    </a>
+                    <form action="#" method="get" [formGroup]="searcherForm" (ngSubmit)="RedirectToSearch()">
+                        <div class="header-search-wrapper search-wrapper-wide">
+                            <label for="q" class="sr-only">Search</label>
+                            <button class="btn btn-primary" type="submit"
+                                [disabled]="searcherForm.controls.searcher.errors">
+                                <i class="icon-search"></i>
+                            </button>
+                            <input type="search" class="form-control" name="q" id="q" placeholder="Buscar Producto ..."
+                                required formControlName="searcher">
+                        </div><!-- End .header-search-wrapper -->
+                    </form>
+                </div><!-- End .header-search -->
+            </div>
+
+            <div class="header-right">
+
+                <div class="dropdown cart-dropdown">
+                    <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false" data-display="static">
+                        <div class="icon">
+                            <i class="icon-shopping-cart"></i>
+                            <span class="cart-count">{{cartData.data[0].numInCart !== 0 ? cartData.data.length :
+                                0}}</span>
+                        </div>
+                        <p>Carrito</p>
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <div class="dropdown-cart-products">
+                            <div class="product" *ngFor="let c of cartData.data; let i=index">
+                                <div class="product-cart-details" *ngIf="cartData.data[0].numInCart !== 0">
+                                    <h3 class="product-title"><a style="cursor: pointer;">{{c.product?.name}}</a></h3>
+                                    <h4 class="cart-product-info"><span class="cart-product-qty">{{c.numInCart}} x
+                                        </span>{{c.product?.price | currency:'USD'}}</h4>
+                                </div>
+                                <figure class="product-image-container">
+                                    <a class="product-image">
+                                        <img src="{{c.product?.image}}">
+                                    </a>
+                                </figure>
+                                <a href="#" class="btn-remove" title="Remove Product"
+                                    (click)="cartService.DeleteProductFromCart(i)"><i class="icon-close"></i></a>
+                            </div>
+                        </div><!-- End .cart-product -->
+
+                        <div class="dropdown-cart-total d-flex">
+                            <small>{{cartData.data[0].numInCart !== 0 ? cartData.data.length : 0}} Item(s)
+                                seleccionados</small>
+                            <h5 class="cart-total-price">TOTAL : {{cartTotal | currency:'USD'}}</h5>
+                        </div><!-- End .dropdown-cart-total -->
+
+                        <div class="dropdown-cart-action">
+                            <a routerLink="/cart" class="btn btn-primary">Ver Carrito</a>
+                            <a routerLink="/checkout" class="btn btn-outline-primary-2"><span>Comprar</span><i
+                                    class="icon-long-arrow-right"></i></a>
+                        </div><!-- End .dropdown-cart-total -->
+                    </div><!-- End .dropdown-menu -->
+                </div><!-- End .cart-dropdown -->
+            </div><!-- End .header-right -->
+        </div><!-- End .container -->
+    </div><!-- End .header-middle -->
+
+    <div class="header-bottom sticky-header">
+        <div class="container">
+            <div class="header-left">
+                <div class="dropdown category-dropdown">
+                    <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false" data-display="static" title="Browse Categories">
+                        Buscar Categorias <i class="icon-angle-down"></i>
+                    </a>
+
+                    <div class="dropdown-menu">
+                        <nav class="side-nav">
+                            <ul class="menu-vertical sf-arrows">
+                                <li class="item-lead"><a href="#">Ofertas Diarias</a></li>
+                                <li *ngFor="let categ of categories">
+                                    <a [routerLink]="['/results/categories/0/', categ.id]">{{categ.title}}</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="header-center">
+                <nav class="main-nav">
+                    <ul class="menu sf-arrows">
+                        <li class="megamenu-container">
+                            <a href="index.html">Inicio</a>
+                        </li>
+                        <li>
+                            <a routerLink="/categories">Tienda</a>
+                        </li>
+                        <li>
+                            <a routerLink="/contact">Contacto</a>
+                        </li>
+                        <li>
+                            <a routerLink="/about">Acerca de</a>
+                        </li>
+                        <li *ngIf="authState">
+                            <a routerLink="/purchases">Compras</a>
+                        </li>
+                    </ul><!-- End .menu -->
+                </nav><!-- End .main-nav -->
+            </div><!-- End .header-center -->
+
+            <div class="header-right">
+                <ul class="top-menu">
+                    <li>
+                        <a href="#">Links</a>
+                        <ul>
+                            <li>
+                                <a routerLink="/profile" data-toggle="modal">{{authState === false ? 'Iniciar
+                                    Sesión/Registrarse': 'Mi cuenta'}}</a>
+                            </li>
+                            <!-- <li *ngIf="!authState">
+                                <a routerLink="/profile">Registrarse</a>
+                            </li>
+                            <li *ngIf="authState">
+                                <a routerLink="/admin">Admin</a>
+                            </li> -->
+
+                        </ul>
+                    </li>
+                </ul><!-- End .top-menu -->
+            </div>
+        </div><!-- End .container -->
+    </div><!-- End .header-bottom -->
+</header><!-- End .header -->
+
+<!-- ---------------------------------------------------------------------------------------------------- -->
+<!-- VERSION MOBILE -->
+
+<div class="mobile-menu-container mobile-menu-light">
+    <div class="mobile-menu-wrapper">
+        <span class="mobile-menu-close"><i class="icon-close"></i></span>
+
+        <form action="#" method="get" class="mobile-search">
+            <label for="mobile-search" class="sr-only">Buscar</label>
+            <input type="search" class="form-control" name="mobile-search" id="mobile-search" placeholder="Buscar ..."
+                required>
+            <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
+        </form>
+
+        <ul class="nav nav-pills-mobile nav-border-anim" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="mobile-menu-link" data-toggle="tab" href="#mobile-menu-tab" role="tab"
+                    aria-controls="mobile-menu-tab" aria-selected="true">Menu</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="mobile-cats-link" data-toggle="tab" href="#mobile-cats-tab" role="tab"
+                    aria-controls="mobile-cats-tab" aria-selected="false">Categories</a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="mobile-menu-tab" role="tabpanel"
+                aria-labelledby="mobile-menu-link">
+                <nav class="mobile-nav">
+                    <ul class="mobile-menu">
+                        <li class="active">
+                            <a routerLink="/home">Inicio</a>
+                        </li>
+                        <li>
+                            <a routerLink="/categories">Tienda</a>
+                        </li>
+                        <li>
+                            <a routerLink="/contact">Contacto</a>
+                        </li>
+                        <li>
+                            <a routerLink="about">Acerca de</a>
+                        </li>
+                    </ul>
+                </nav><!-- End .mobile-nav -->
+            </div><!-- .End .tab-pane -->
+            <div class="tab-pane fade" id="mobile-cats-tab" role="tabpanel" aria-labelledby="mobile-cats-link">
+                <nav class="mobile-cats-nav">
+                    <ul class="mobile-cats-menu">
+                        <li *ngFor="let categ of categories">
+                            <a [routerLink]="['/results/categories/0/', categ.id]">{{categ.title}}</a>
+                        </li>
+                    </ul><!-- End .mobile-cats-menu -->
+                </nav><!-- End .mobile-cats-nav -->
+            </div><!-- .End .tab-pane -->
+        </div><!-- End .tab-content -->
+
+        <div class="social-icons">
+            <a href="#" class="social-icon" target="_blank" title="Facebook"><i class="icon-facebook-f"></i></a>
+            <a href="#" class="social-icon" target="_blank" title="Twitter"><i class="icon-twitter"></i></a>
+            <a href="#" class="social-icon" target="_blank" title="Instagram"><i class="icon-instagram"></i></a>
+            <a href="#" class="social-icon" target="_blank" title="Youtube"><i class="icon-youtube"></i></a>
+        </div><!-- End .social-icons -->
+    </div><!-- End .mobile-menu-wrapper -->
+</div><!-- End .mobile-menu-container -->

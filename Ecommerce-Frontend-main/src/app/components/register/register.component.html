@@ -1,0 +1,179 @@
+<div class="container my-5">
+  <ng-container *ngIf="registrationMessage?.length > 0">
+    <div class="alert alert-success alert-dismissible">
+      {{registrationMessage}}
+    </div>
+  </ng-container>
+
+  <form (ngSubmit)="registerUser()" [formGroup]="registrationForm" class="form-horizontal" novalidate>
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <h2>Registrar Nuevo Usuario</h2>
+        <hr>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 field-label-responsive">
+        <label for="fname">Primer Nombre</label>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-prepend" style="width: 2.6rem"><i class="fa fa-user"></i></div>
+            <input class="form-control" formControlName="fname" id="fname" name="fname" placeholder="Pepito" required
+              type="text">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-control-feedback">
+          <span class="text-danger align-middle">
+            <!-- Put name validation error messages here -->
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 field-label-responsive">
+        <label for="lname">Segundo Nombre</label>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-prepend" style="width: 2.6rem"><i class="fa fa-user"></i></div>
+            <input class="form-control" formControlName="lname" id="lname" name="lname" placeholder="Perez" required
+              type="text">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-control-feedback">
+          <span class="text-danger align-middle">
+            <!-- Put name validation error messages here -->
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 field-label-responsive">
+        <label for="email">Correo electrónico</label>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-at"></i></div>
+            <input class="form-control" formControlName="email" id="email" name="email" placeholder="tu_correo@ejemplo.com"
+              required type="text">
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-3">
+        <div class="form-control-feedback">
+          <ng-container *ngIf="formControls.email.errors?.taken && formControls.email.touched">
+            <span class="text-danger align-middle">
+              <i class="fa fa-close"> Correo ya registrado</i>
+            </span>
+          </ng-container>
+          <ng-container *ngIf="formControls.email.pending && formControls.email.touched">
+            <span class="text-info align-middle">
+              <i class="fa fa-hourglass"> Verificando correo ....</i>
+            </span>
+          </ng-container>
+          <ng-container *ngIf="!formControls.email.errors && formControls.email.touched && !formControls.email.pending">
+            <span class="text-success align-middle">
+              <i class="fa fa-check"> Correo disponible </i>
+            </span>
+          </ng-container>
+          <ng-container *ngIf="formControls.email.errors?.required && formControls.email.touched">
+            <span class="text-danger align-middle">
+              <i class="fa fa-check"> Correo requerido</i>
+            </span>
+          </ng-container>
+
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 field-label-responsive">
+        <label for="password">Contraseña</label>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group has-danger">
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
+            <input class="form-control" formControlName="password" id="password" name="password" placeholder="Contraseña"
+              required type="password">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-control-feedback">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 field-label-responsive">
+        <label for="password">Confirmar contraseña</label>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-addon" style="width: 2.6rem">
+              <i class="fa fa-repeat"></i>
+            </div>
+            <input class="form-control" formControlName="confirmPassword" id="password-confirm"
+              name="password-confirmation" placeholder="Contraseña" required type="password">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-control-feedback">
+          <ng-container *ngIf="!comparePassword && formControls.confirmPassword.touched">
+            <span class="text-danger align-middle">
+              <i class="fa fa-close"> Las contraseñas no coinciden</i>
+            </span>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <button [disabled]="(registrationForm.invalid || registrationForm.pending) && registrationForm.touched "
+          class="btn btn-primary btn-sm btn-block" type="submit">
+          <i class="fa fa-user-plus"></i> Registrar
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="tab-pane" id="register-2" role="tabpanel" aria-labelledby="register-tab-2">
+  <form action="#">
+    <div class="form-group">
+      <label for="register-email-2">Your email address *</label>
+      <input type="email" class="form-control" id="register-email-2" name="register-email" required>
+    </div><!-- End .form-group -->
+
+    <div class="form-group">
+      <label for="register-password-2">Password *</label>
+      <input type="password" class="form-control" id="register-password-2" name="register-password"
+        required>
+    </div><!-- End .form-group -->
+
+    <div class="form-footer">
+      <button type="submit" class="btn btn-outline-primary-2">
+        <span>SIGN UP</span>
+        <i class="icon-long-arrow-right"></i>
+      </button>
+
+      <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" id="register-policy-2" required>
+        <label class="custom-control-label" for="register-policy-2">I agree to the <a href="#">privacy
+            policy</a> *</label>
+      </div><!-- End .custom-checkbox -->
+    </div><!-- End .form-footer -->
+  </form>
+</div>

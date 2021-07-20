@@ -1,0 +1,51 @@
+<div class="p-5 m-5">
+  <div class="px-5 mx-5">
+    <h1>Detalles de la categoría</h1>
+    <div class="conteiner-fluid py-5">
+      <a class="btn btn-primary" [routerLink]="['/admin/categoria']">Volver al menu de categorías</a>
+    </div>
+    <table class="table table-striped table-inverse text-center">
+      <thead class="thead-dark">
+        <tr>
+          <th>Nombre de Producto</th>
+          <th>Imagen</th>
+          <th>Precio Individual</th>
+          <th>Cantidades Vendidas</th>
+          <th>Ingreso</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prod of products">
+          <td>
+            {{prod.title}}
+          </td>
+          <td class="d-flex justify-content-center">
+            <img class="image" [src]="prod.images" />
+          </td>
+          <td>
+            {{prod.price}}
+          </td>
+          <td>
+            {{prod.sum_prods}}
+          </td>
+          <td>
+            {{(prod.sum_prods * prod.price) | number : '1.0-2'}} $
+          </td>
+        </tr>
+      </tbody>
+      <tfoot class="thead-dark">
+        <tr>
+          <th>TOTALES</th>
+          <th></th>
+          <th></th>
+          <th>
+            {{sold_quantity | number : '1.0-2'}}
+          </th>
+          <th>
+            {{total_income | number : '1.0-2'}} $
+          </th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>

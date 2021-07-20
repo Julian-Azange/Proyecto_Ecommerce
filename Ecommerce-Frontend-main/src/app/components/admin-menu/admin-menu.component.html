@@ -1,0 +1,26 @@
+<main class="main">
+    <div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
+      <div class="container">
+        <h1 class="page-title">Gestión de la Tienda<span>Admin - {{myUser.fname + ' ' + myUser.lname}}</span></h1>
+      </div><!-- End .container -->
+    </div><!-- End .page-header -->
+    <nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
+      <div class="container">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="/home">Inicio</a></li>
+          <li class="breadcrumb-item"><a routerLink="/profile">Mi Cuenta</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Gestión de la Tienda</li>
+        </ol>
+      </div>
+    </nav>
+    <div class="p-5 m-5">
+      <div class="px-5 mx-5">
+        <div class="container d-flex justify-content-around">
+          <button class="btn btn-primary" [routerLink]="['/admin/categoria']">Categoria</button>
+          <button class="btn btn-success" [routerLink]="['/admin/producto']">Productos</button>
+          <button class="btn btn-warning" [routerLink]="['/admin/users']">Usuarios</button>
+          <button class="btn btn-danger" routerLink="/profile">Cerrar</button>
+        </div>
+      </div>
+    </div>
+</main>
